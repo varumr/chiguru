@@ -31,17 +31,36 @@ export class Tasks extends Component {
   render() {
     const edit = <Tooltip id="edit_tooltip">Edit Task</Tooltip>;
     const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>;
-    const tasks_title = [
-      'Sign contract for "What are conference organizers afraid of?"',
-      "Lines From Great Russian Literature? Or E-mails From My Boss?",
-      "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroi",
-      "Create 4 Invisible User Experiences you Never Knew About",
-      'Read "Following makes Medium better"',
-      "Unfollow 5 enemies from twitter"
+    const tasksList = [
+      {title:'Check drip irrigation setup',
+      project: 'Polyhouse 1',
+      dueDate: '03/02/2020',
+      active: true,
+      completed:false},
+      {title:'Koli gobbara Fertilizer for Top Secret Plants',
+      project: 'Polyhouse 2',
+      dueDate: '03/02/2020',
+      active: true,
+      completed:false},
+      {title:'Organic Pestiside for 1/2 polyhouse',
+      project: 'Polyhouse 3',
+      dueDate: '03/02/2020',
+      active: true,
+      completed:false},
+      {title:'Neem solution spray for baby plants',
+      project: 'Polyhouse 4',
+      dueDate: '03/02/2020',
+      active: true,
+      completed:false},
+      {title:'Cleanup the pressure pumps',
+      project: 'Polyhouse 4',
+      dueDate: '03/02/2020',
+      active: true,
+      completed:false},
     ];
     var tasks = [];
     var number;
-    for (var i = 0; i < tasks_title.length; i++) {
+    for (var i = 0; i < tasksList.length; i++) {
       number = "checkbox" + i;
       tasks.push(
         <tr key={i}>
@@ -51,7 +70,10 @@ export class Tasks extends Component {
               isChecked={i === 1 || i === 2 ? true : false}
             />
           </td>
-          <td>{tasks_title[i]}</td>
+          <td>{tasksList[i].project}</td>
+          <td>{tasksList[i].title}</td>
+          <td>{tasksList[i].dueDate}</td>
+
           <td className="td-actions text-right">
             <OverlayTrigger placement="top" overlay={edit}>
               <Button bsStyle="info" simple type="button" bsSize="xs">
