@@ -101,7 +101,7 @@ const dashboardRoutes = [
     icon: "pe-7s-user",
     component: UserProfile,
     layout: "/admin",
-    showInSideBar: false
+    showInSideBar: true
   },
   {
     path: "/table",
