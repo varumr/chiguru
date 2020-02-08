@@ -20,69 +20,98 @@ import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import Checkbox from "components/CustomCheckbox/CustomCheckbox.jsx";
 import Button from "components/CustomButton/CustomButton.jsx";
 
+import axios from '../../axios-connection';
+
+
 export class Tasks extends Component {
-  handleCheckbox = event => {
-    const target = event.target;
-    console.log(event.target);
-    this.setState({
-      [target.name]: target.checked
-    });
-  };
+    state = {
+        schedules: [],
+        loading: true,
+    }
+
+    componentWillMount(){
+      this.updateTaskList();
+    }
+
+    updateTaskList = () => {  
+        axios.get('/schedule.json?orderby=project')
+        .then(response => {
+            console.log(response.data);
+            const schedules =[];
+            for(let key in response.data){
+             // console.log(key);  
+              schedules.push({
+                    ...response.data[key],
+                    id:key
+                })
+            }
+            this.setState({
+             // loading:false, 
+              schedules:schedules})        
+        })
+        .catch(error =>{
+            //this.setState({loading:false})
+            console.log(error);
+            
+        })
+    }
+
+    taskCompletedHandler = (key, number, completed) => {
+      console.log('taskCompletedHandler ->' + completed); 
+      const newStatus = !completed
+      
+      axios.put('/schedule/'+ key + '/completed.json', newStatus)
+        .then(response => {
+          this.updateTaskList();
+        })
+        .catch(error => {
+            console.log(error);
+        });   
+    }
+
+taskDeletedHandler = ( key) => {
+  console.log('taskDeleteHandler' + key);
+        axios.delete('/schedule/'+ key + '.json')
+        .then(response => {
+          this.updateTaskList();
+        })
+        .catch(error => {
+            console.log(error);
+        }); 
+}
   render() {
     const edit = <Tooltip id="edit_tooltip">Edit Task</Tooltip>;
     const remove = <Tooltip id="remove_tooltip">Remove</Tooltip>;
-    const tasksList = [
-      {title:'Check drip irrigation setup',
-      project: 'Polyhouse 1',
-      dueDate: '03/02/2020',
-      active: true,
-      completed:false},
-      {title:'Koli gobbara Fertilizer for Top Secret Plants',
-      project: 'Polyhouse 2',
-      dueDate: '03/02/2020',
-      active: true,
-      completed:false},
-      {title:'Organic Pestiside for 1/2 polyhouse',
-      project: 'Polyhouse 3',
-      dueDate: '03/02/2020',
-      active: true,
-      completed:false},
-      {title:'Neem solution spray for baby plants',
-      project: 'Polyhouse 4',
-      dueDate: '03/02/2020',
-      active: true,
-      completed:false},
-      {title:'Cleanup the pressure pumps',
-      project: 'Polyhouse 4',
-      dueDate: '03/02/2020',
-      active: true,
-      completed:false},
-    ];
+    const tasksList = this.state.schedules;
     var tasks = [];
     var number;
+
     for (var i = 0; i < tasksList.length; i++) {
       number = "checkbox" + i;
+      const taskKey = tasksList[i].id;
+      const taskCompleted = tasksList[i].completed;
+      
       tasks.push(
         <tr key={i}>
           <td>
             <Checkbox
               number={number}
-              isChecked={i === 1 || i === 2 ? true : false}
+              isChecked={tasksList[i].completed ? true : false}
+              onClick={() => this.taskCompletedHandler(taskKey, i, taskCompleted)}
             />
           </td>
+          <td style={{textDecoration:tasksList[i].completed ?'line-through':''}}>
+           {tasksList[i].task} </td>
           <td>{tasksList[i].project}</td>
-          <td>{tasksList[i].title}</td>
-          <td>{tasksList[i].dueDate}</td>
-
+          <td>{tasksList[i].date}</td>  
           <td className="td-actions text-right">
             <OverlayTrigger placement="top" overlay={edit}>
               <Button bsStyle="info" simple type="button" bsSize="xs">
                 <i className="fa fa-edit" />
               </Button>
             </OverlayTrigger>
-
             <OverlayTrigger placement="top" overlay={remove}>
-              <Button bsStyle="danger" simple type="button" bsSize="xs">
+              <Button bsStyle="danger" onClick={() => this.taskDeletedHandler(taskKey)} simple type="button" bsSize="xs">
                 <i className="fa fa-times" />
               </Button>
             </OverlayTrigger>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col,Table } from "react-bootstrap";
 
 import CustomButton from 'components/CustomButton/CustomButton';
 
@@ -8,9 +8,12 @@ import CustomButton from 'components/CustomButton/CustomButton';
 import { Card } from "components/Card/Card.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
 
+
 class ListSchedule extends Component {
     onClickHandler = () => {
         console.log('onclickhandler');
+        this.props.history.push('/admin/schedule/new');
+
         
     };
     render(){
@@ -21,20 +24,20 @@ class ListSchedule extends Component {
             <Col md={12}>
                 <div  >
                 <CustomButton  style={{margin:'10px'}} bsStyle="info" onClick={this.onClickHandler} pullRight fill>
-                    Add new Task
+                    Add new Schedule
                 </CustomButton>
                 
                 </div>
               <Card
-                title="Today's Tasks"
-                category="Project maintenance schedule"
-                stats="Updated 3 minutes ago"
-                statsIcon="fa fa-history"
+                title="Today's Schedule"
+                category="Overall Project maintenance schedule"
+                stats=""
+                statsIcon=""
                 content={
                   <div className="table-full-width">
-                    <table className="table">
+                    <Table responsive className="table">
                       <Tasks />
-                    </table>
+                    </Table>
                   </div>
                 }
               />
