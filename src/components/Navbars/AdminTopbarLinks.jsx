@@ -1,24 +1,6 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { Component } from "react";
 import { NavItem, Nav, NavDropdown, MenuItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-
 
 class AdminTopbarLinks extends Component {
   render() {
@@ -52,7 +34,7 @@ class AdminTopbarLinks extends Component {
             id="basic-nav-dropdown-right" >
             <MenuItem eventKey={3.1} href='/admin/schedule/list'>Project List Schedule</MenuItem>
             <MenuItem eventKey={3.2} href='/admin/schedule/new'>Add new Schedule</MenuItem>
-            <MenuItem eventKey={3.3} href='/admin/schedule/calendar'>Calendar View</MenuItem>
+            <MenuItem eventKey={3.3} href='/admin/schedule/monthview'>Calendar View</MenuItem>
           </NavDropdown>     
           <NavDropdown
             eventKey={4}

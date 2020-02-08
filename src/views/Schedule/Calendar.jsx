@@ -22,75 +22,77 @@ export default class CalendarView extends Component {
         loading: true,
     }
 
-    // componentWillMount(){
-    //   this.updateTaskList();
-    // }
 
-    updateTaskList = () => {  
-        let schedules = [{
-            start: new Date('02/02/2020'),
-            end: new Date('02/02/2020'),
-            title: 'testxczv cvzxcvs',
-            allDay:true
-          },
-          {
-            start: new Date('02/05/2020'),
-            end: new Date('02/05/2020'),
-            title: 'testsadfasf',
-            allDay:true
-          },{
-            start: new Date('02/06/2020'),
-            end: new Date('02/06/2020'),
-            title: 'test wer',
-            allDay:true
-          },{
-            start: new Date('02/07/2020'),
-            end: new Date('02/07/2020'),
-            title: 'test dfwer',
-            allDay:true
-          },{
-            start: new Date('02/07/2020'),
-            end: new Date('02/07/2020'),
-            title: 'test werqwre',
-            allDay:true
-          },{
-            start: new Date('02/02/2020'),
-            end: new Date('02/02/2020'),
-            title: 'test',
-            allDay:true
-          }]
+    componentDidMount() {
+      
+      //   let schedules = [{
+      //       start: new Date('02/02/2020'),
+      //       end: new Date('02/02/2020'),
+      //       title: 'testxczv cvzxcvs',
+      //       allDay:true
+      //     },
+      //     {
+      //       start: new Date('02/05/2020'),
+      //       end: new Date('02/05/2020'),
+      //       title: 'testsadfasf',
+      //       allDay:true
+      //     },{
+      //       start: new Date('02/06/2020'),
+      //       end: new Date('02/06/2020'),
+      //       title: 'test wer',
+      //       allDay:true
+      //     },{
+      //       start: new Date('02/07/2020'),
+      //       end: new Date('02/07/2020'),
+      //       title: 'test dfwer',
+      //       allDay:true
+      //     },{
+      //       start: new Date('02/07/2020'),
+      //       end: new Date('02/07/2020'),
+      //       title: 'test werqwre',
+      //       allDay:true
+      //     },{
+      //       start: new Date('02/02/2020'),
+      //       end: new Date('02/02/2020'),
+      //       title: 'test',
+      //       allDay:true
+      //     }];
 
-          console.log(schedules);
+      //     console.log(schedules);
           
+      //  // return schedules;
 
-            return schedules;
+      let schedules = [];
 
-        axios.get('/schedule.json?orderby=project')
+        axios.get('/schedule.json')
         .then(response => {
-          console.log(response.data);
-          //  let schedules =[];
-          //   console.log(schedules);
-            
-          // schedules.map(event => {
-          //   return schedules.push({
-          //     start: new Date(event.start),
-          //     end: new Date(event.end),
-          //     title: `${event.pet_name} Stay (Human: ${event.human_name})`,
-          //     allDay: true
-          //   })
-          // })
-
+            console.log(response.data);
+            schedules =[];
+            for(let key in response.data){
+             // console.log(key);  
+              schedules.push({
+                    //...response.data[key],
+                    id:key,
+                  start: new Date(response.data[key].date),
+                  end: new Date(response.data[key].date),
+                  title: response.data[key].task,
+                  allDay:true
           
-              
-        })
+                })
+            }
+           // console.log(schedules);
+             this.setState({
+              schedules:schedules}) 
+            })
         .catch(error =>{
-            //this.setState({loading:false})
             console.log(error);
-            
+            return schedules;
         })
+           
     }
 
   render() {
+    //this.updateTaskList();
     return(
       <Grid>
         <Row>
@@ -103,7 +105,7 @@ export default class CalendarView extends Component {
                   <div className="calendar-container" style={{height:'500px',width:'95%',margin:'auto'}}>
                     <Calendar
                       localizer={localizer}
-                      events={this.updateTaskList()}
+                      events={this.state.schedules}
                       startAccessor="start"
                       endAccessor="end"
                     />
