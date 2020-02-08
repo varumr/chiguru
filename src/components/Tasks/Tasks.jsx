@@ -90,8 +90,19 @@ taskDeletedHandler = ( key) => {
       number = "checkbox" + i;
       const taskKey = tasksList[i].id;
       const taskCompleted = tasksList[i].completed;
+      let completedBy = 
+          <Tooltip id="completedBy_tooltip">
+            Not Complete
+          </Tooltip>;
       
+      if(taskCompleted){
+        completedBy = <Tooltip id="completedBy_tooltip">
+          By:{tasksList[i].completedBy}<br />
+          On:{tasksList[i].completedOn}
+          </Tooltip>;
+      } 
       tasks.push(
+
         <tr key={i}>
           <td>
             <Checkbox
@@ -100,8 +111,10 @@ taskDeletedHandler = ( key) => {
               onClick={() => this.taskCompletedHandler(taskKey, i, taskCompleted)}
             />
           </td>
+          <OverlayTrigger placement="left" overlay={completedBy}>
           <td style={{textDecoration:tasksList[i].completed ?'line-through':''}}>
            {tasksList[i].task} </td>
+          </OverlayTrigger>
           <td>{tasksList[i].project}</td>
           <td>{tasksList[i].date}</td>  
           <td className="td-actions text-right">
@@ -110,8 +123,11 @@ taskDeletedHandler = ( key) => {
                 <i className="fa fa-edit" />
               </Button>
             </OverlayTrigger>
-            <OverlayTrigger placement="top" overlay={remove}>
-              <Button bsStyle="danger" onClick={() => this.taskDeletedHandler(taskKey)} simple type="button" bsSize="xs">
+            <OverlayTrigger placement="top" overlay={completedBy}>
+              <Button bsStyle="danger" 
+              onClick={() => this.taskDeletedHandler(taskKey)} 
+              simple type="button" 
+              bsSize="xs">
                 <i className="fa fa-times" />
               </Button>
             </OverlayTrigger>
