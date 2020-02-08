@@ -32,6 +32,7 @@ import Revenue from "views/Financial/Revenue.jsx";
 
 import ListSchedule from "views/Schedule/ListSchedule.jsx";
 import NewSchedule from "views/Schedule/NewSchedule.jsx";
+import CalendarView from "views/Schedule/Calendar.jsx";
 
 import AddEmployee from "views/Attendence/AddEmployee.jsx";
 import Monthwise from "views/Attendence/Monthwise.jsx";
@@ -196,6 +197,14 @@ const dashboardRoutes = [
     name: "Add New Schedule",
     icon: "pe-7s-graph",
     component: NewSchedule,
+    layout: "/admin",
+    showInSideBar: false
+  },
+   {
+    path: "/schedule/monthview",
+    name: "Schedule -Month View",
+    icon: "pe-7s-graph",
+    component: CalendarView,
     layout: "/admin",
     showInSideBar: false
   },

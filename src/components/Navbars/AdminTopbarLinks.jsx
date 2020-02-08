@@ -52,6 +52,7 @@ class AdminTopbarLinks extends Component {
             id="basic-nav-dropdown-right" >
             <MenuItem eventKey={3.1} href='/admin/schedule/list'>Project List Schedule</MenuItem>
             <MenuItem eventKey={3.2} href='/admin/schedule/new'>Add new Schedule</MenuItem>
+            <MenuItem eventKey={3.3} href='/admin/schedule/calendar'>Calendar View</MenuItem>
           </NavDropdown>     
           <NavDropdown
             eventKey={4}
