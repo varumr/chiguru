@@ -24,63 +24,20 @@ export default class CalendarView extends Component {
 
 
     componentDidMount() {
-      
-      //   let schedules = [{
-      //       start: new Date('02/02/2020'),
-      //       end: new Date('02/02/2020'),
-      //       title: 'testxczv cvzxcvs',
-      //       allDay:true
-      //     },
-      //     {
-      //       start: new Date('02/05/2020'),
-      //       end: new Date('02/05/2020'),
-      //       title: 'testsadfasf',
-      //       allDay:true
-      //     },{
-      //       start: new Date('02/06/2020'),
-      //       end: new Date('02/06/2020'),
-      //       title: 'test wer',
-      //       allDay:true
-      //     },{
-      //       start: new Date('02/07/2020'),
-      //       end: new Date('02/07/2020'),
-      //       title: 'test dfwer',
-      //       allDay:true
-      //     },{
-      //       start: new Date('02/07/2020'),
-      //       end: new Date('02/07/2020'),
-      //       title: 'test werqwre',
-      //       allDay:true
-      //     },{
-      //       start: new Date('02/02/2020'),
-      //       end: new Date('02/02/2020'),
-      //       title: 'test',
-      //       allDay:true
-      //     }];
-
-      //     console.log(schedules);
-          
-      //  // return schedules;
-
       let schedules = [];
-
-        axios.get('/schedule.json')
+      axios.get('/schedule.json')
         .then(response => {
             console.log(response.data);
             schedules =[];
             for(let key in response.data){
-             // console.log(key);  
               schedules.push({
-                    //...response.data[key],
-                    id:key,
+                  id:key,
                   start: new Date(response.data[key].date),
                   end: new Date(response.data[key].date),
                   title: response.data[key].task,
                   allDay:true
-          
                 })
             }
-           // console.log(schedules);
              this.setState({
               schedules:schedules}) 
             })
@@ -92,7 +49,6 @@ export default class CalendarView extends Component {
     }
 
   render() {
-    //this.updateTaskList();
     return(
       <Grid>
         <Row>
@@ -114,8 +70,7 @@ export default class CalendarView extends Component {
               />
           </Col>
         </Row>
-      </Grid>
-      
+      </Grid>      
     )
   }
 }
