@@ -17,7 +17,7 @@ export class Tasks extends Component {
     }
 
     updateTaskList = () => {  
-        axios.get('/schedule.json?orderby=project')
+        axios.get('/schedule.json?orderByChild="$project"')
         .then(response => {
             console.log(response.data);
             const schedules =[];
@@ -28,6 +28,21 @@ export class Tasks extends Component {
                     id:key
                 })
             }
+            schedules.sort(function(a, b) {
+                var nameA = a.project.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.project.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                // names must be equal
+                return 0;
+                });
+
+            console.log(schedules);
+            
             this.setState({
              // loading:false, 
               schedules:schedules})        
