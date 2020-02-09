@@ -39,11 +39,16 @@ export class Tasks extends Component {
         })
     }
 
-    taskCompletedHandler = (key, number, completed) => {
-      console.log('taskCompletedHandler ->' + completed); 
-      const newStatus = !completed
+    taskCompletedHandler = (key, number, oldStatus, task) => {
+      const newStatus = !oldStatus;
+      let updatedTask = {
+        ...task,
+        completed: newStatus,
+        completedBy: newStatus ?'admin' : '',
+        completedOn: newStatus ? new Date() : null
+      }
       
-      axios.put('/schedule/'+ key + '/completed.json', newStatus)
+      axios.put('/schedule/'+ key + '.json', updatedTask)
         .then(response => {
           this.updateTaskList();
         })
@@ -73,6 +78,7 @@ taskDeletedHandler = ( key) => {
       number = "checkbox" + i;
       const taskKey = tasksList[i].id;
       const taskCompleted = tasksList[i].completed;
+      const task = tasksList[i];
       let completedBy = 
           <Tooltip id="completedBy_tooltip">
             Not Complete
@@ -80,8 +86,8 @@ taskDeletedHandler = ( key) => {
       
       if(taskCompleted){
         completedBy = <Tooltip id="completedBy_tooltip">
-          By:{tasksList[i].completedBy}<br />
-          On:{tasksList[i].completedOn}
+          By - {tasksList[i].completedBy}<br />
+          On - {new Date(tasksList[i].completedOn).toLocaleDateString("en-US")}
           </Tooltip>;
       } 
       tasks.push(
@@ -91,7 +97,7 @@ taskDeletedHandler = ( key) => {
             <Checkbox
               number={number}
               isChecked={tasksList[i].completed ? true : false}
-              onClick={() => this.taskCompletedHandler(taskKey, i, taskCompleted)}
+              onClick={() => this.taskCompletedHandler(taskKey, i, taskCompleted, task)}
             />
           </td>
           <OverlayTrigger placement="left" overlay={completedBy}>
