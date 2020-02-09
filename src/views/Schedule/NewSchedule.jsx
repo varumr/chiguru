@@ -11,8 +11,8 @@ import {
 import { Card } from "components/Card/Card.jsx";
 import { FormInputs } from "components/FormInputs/FormInputs.jsx";
 import  Input  from "components/FormInputs/Input.jsx";
-import Button from "components/CustomButton/CustomButton.jsx";
 import Checkbox from 'components/CustomCheckbox/CustomCheckbox';
+import CustomButton from 'components/CustomButton/CustomButton';
 
 import axios from '../../axios-connection';
 
@@ -185,9 +185,9 @@ class NewSchedule extends Component {
                                 changed={(event) => this.inputChangedHandler(event,formElement.id)}
                         />)
                     )}
-                    <Button btntype='Success' type="submit" 
-                        disabled={!this.state.formIsValid}>
-                            Add Task</Button>
+                    <CustomButton  bsStyle="info" fill>
+                        Add Schedule
+                    </CustomButton>
                 </form>);
         return(
             <div className="content">
