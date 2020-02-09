@@ -2,11 +2,10 @@
 //import moment from 'moment';
  
 import React, { Component } from 'react'
-//import BigCalendar from 'react-big-calendar'
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-
-import moment from 'moment'
+import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+
 import axios from '../../axios-connection';
 
 import { Grid, Row, Col } from "react-bootstrap";
@@ -20,8 +19,30 @@ export default class CalendarView extends Component {
     state = {
         schedules: [],
         loading: true,
-    }
+    };
 
+   formatTitle = (task) =>{
+    let formattedTitle = task.task;
+    let styleTag = [];
+
+    if(task.completed){
+     // formattedTitle = <span style={{textDecoration: 'line-through'}}>{formattedTitle}</span>
+     //styleTag.push('textDecoration:'line-through''); 
+    formattedTitle = <del>{formattedTitle}</del>
+    }
+    if(task.project == 'polyhouse1'){
+      formattedTitle=<span className="text-danger">{formattedTitle}</span>
+   } else if(task.project == 'polyhouse2'){
+      formattedTitle=<span className="text-secondary">{formattedTitle}</span>
+    } else if(task.project == 'polyhouse3'){
+      formattedTitle=<span className="text-warning">{formattedTitle}</span>
+    } else if(task.project == 'polyhouse4'){
+      formattedTitle=<span className="text-success">{formattedTitle}</span>
+    }
+  
+    return formattedTitle;
+   }
+     
 
     componentDidMount() {
       let schedules = [];
@@ -34,7 +55,8 @@ export default class CalendarView extends Component {
                   id:key,
                   start: new Date(response.data[key].date),
                   end: new Date(response.data[key].date),
-                  title: response.data[key].task,
+                  title: this.formatTitle(response.data[key]),
+                  //title: response.data[key].task,
                   allDay:true
                 })
             }
