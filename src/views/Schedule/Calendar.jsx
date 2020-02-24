@@ -5,11 +5,13 @@ import React, { Component } from 'react'
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './calendar.css';
 
 import axios from '../../axios-connection';
 
 import { Grid, Row, Col } from "react-bootstrap";
 import { Card } from "components/Card/Card.jsx";
+
 
 const localizer = momentLocalizer(moment)
  
@@ -22,7 +24,7 @@ export default class CalendarView extends Component {
     };
 
    formatTitle = (task) =>{
-    let formattedTitle = task.task;
+    let formattedTitle = task.project + ' - ' + task.task;
     let styleTag = [];
 
     if(task.completed){
@@ -84,8 +86,10 @@ export default class CalendarView extends Component {
                     <Calendar
                       localizer={localizer}
                       events={this.state.schedules}
-                      startAccessor="start"
-                      endAccessor="end"
+                      views={{ agenda: true }}
+                      defaultView="agenda"
+                      length={7}
+                      defaultDate={new Date()}
                     />
                   </div>
                 }

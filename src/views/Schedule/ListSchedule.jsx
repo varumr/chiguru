@@ -36,6 +36,15 @@ class ListSchedule extends Component {
                 content={
                   <div className="table-full-width">
                     <Table responsive className="table">
+                      <thead>
+                        <tr>
+                          <th>Status</th>
+                          <th>Task</th>
+                          <th>Project</th>
+                          <th>Due Date</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
                       <Tasks />
                     </Table>
                   </div>

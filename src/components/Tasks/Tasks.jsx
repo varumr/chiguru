@@ -116,17 +116,20 @@ taskDeletedHandler = ( key) => {
             />
           </td>
           <OverlayTrigger placement="left" overlay={completedBy}>
-          <td style={{textDecoration:tasksList[i].completed ?'line-through':''}}>
-           {tasksList[i].task} </td>
+          <td>
+            <span style={{textDecoration:tasksList[i].completed ?'line-through':''}}>
+              {tasksList[i].task} 
+            </span>
+           </td>
           </OverlayTrigger>
           <td>{tasksList[i].project}</td>
           <td>{tasksList[i].date}</td>  
-          <td className="td-actions text-right">
-            <OverlayTrigger placement="top" overlay={edit}>
+          <td className="td-actions">
+            {/* <OverlayTrigger placement="top" overlay={edit}>
               <Button bsStyle="info" simple type="button" bsSize="xs">
                 <i className="fa fa-edit" />
               </Button>
-            </OverlayTrigger>
+            </OverlayTrigger> */}
             <OverlayTrigger placement="top" overlay={completedBy}>
               <Button bsStyle="danger" 
               onClick={() => this.taskDeletedHandler(taskKey)} 

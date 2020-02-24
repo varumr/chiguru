@@ -1,0 +1,10 @@
+.rbc-time-header{
+    border: solid 1px #DDD;
+}
+.rbc-time-content{
+    display: none;
+    border: none;
+}
+.rbc-row-segment{
+    height: 100%;
+}

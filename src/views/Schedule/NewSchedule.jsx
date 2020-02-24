@@ -136,7 +136,7 @@ class NewSchedule extends Component {
 
     addNewTaskHandler = (event) => {
         event.preventDefault();
-       // console.log('addNewTaskHandler');
+        console.log('addNewTaskHandler');
         
         const formData = {};
         for(let formElementIdentifier in this.state.addTaskForm){
@@ -185,7 +185,7 @@ class NewSchedule extends Component {
                                 changed={(event) => this.inputChangedHandler(event,formElement.id)}
                         />)
                     )}
-                    <CustomButton  bsStyle="info" fill>
+                    <CustomButton type='submit' bsStyle="info" fill>
                         Add Schedule
                     </CustomButton>
                 </form>);
