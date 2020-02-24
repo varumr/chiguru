@@ -23,10 +23,10 @@ class AdminTopbarLinks extends Component {
             eventKey={2}
             title="Financials"
             id="basic-nav-dropdown-right">
-            <MenuItem href='/admin/financials/expenses' eventKey={2.1}>Expenses</MenuItem>
-            <MenuItem href='/admin/financials/revenue' eventKey={2.2}>Revenue</MenuItem>
-            <MenuItem href='/admin/financials/fundview' eventKey={2.3}>Fund View</MenuItem>
-            <MenuItem href='/admin/financials/payouttopartner' eventKey={2.4}>Payout to Partner</MenuItem>
+            <MenuItem href='/admin/financial/expenses' eventKey={2.1}>Expenses</MenuItem>
+            <MenuItem href='/admin/financial/revenue' eventKey={2.2}>Revenue</MenuItem>
+            <MenuItem href='/admin/financial/fundview' eventKey={2.3}>Fund View</MenuItem>
+            <MenuItem href='/admin/financial/payouttopartner' eventKey={2.4}>Payout to Partner</MenuItem>
           </NavDropdown>
           <NavDropdown
             eventKey={3}

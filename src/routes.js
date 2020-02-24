@@ -16,7 +16,7 @@
 
 */
 import Dashboard from "views/Dashboard.jsx";
-import UserProfile from "views/UserProfile.jsx";
+//import UserProfile from "views/UserProfile.jsx";
 import TableList from "views/TableList.jsx";
 // import Typography from "views/Typography.jsx";
 import Icons from "views/Icons.jsx";
@@ -56,14 +56,14 @@ const dashboardRoutes = [
     layout: "/admin",
     showInSideBar: true
   },
-  {
-    path: "/financial",
-    name: "Financial",
-    icon: "pe-7s-cash",
-    component: Financial,
-    layout: "/admin",
-    showInSideBar: true
-  },
+  // {
+  //   path: "/financial",
+  //   name: "Financial",
+  //   icon: "pe-7s-cash",
+  //   component: Financial,
+  //   layout: "/admin",
+  //   showInSideBar: true
+  // },
   {
     path: "/schedule/list",
     name: "Schedule",
@@ -96,14 +96,14 @@ const dashboardRoutes = [
     layout: "/admin",
     showInSideBar: true
   },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: "pe-7s-user",
-    component: UserProfile,
-    layout: "/admin",
-    showInSideBar: true
-  },
+  // {
+  //   path: "/user",
+  //   name: "User Profile",
+  //   icon: "pe-7s-user",
+  //   component: UserProfile,
+  //   layout: "/admin",
+  //   showInSideBar: true
+  // },
   {
     path: "/table",
     name: "Table List",
